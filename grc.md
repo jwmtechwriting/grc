@@ -54,11 +54,11 @@ The Video Game Condition Code (VGCC) is a condensed text string intended to deno
 
 ## The Need for a Standard
 
-Most who have tried curating their own collection of video games understands that doing so has historically been a hassle. Whereas there are clearly-defined, community-accepted guidelines for collecting in other fields, such as coins, comics, and artwork, video games have been notably lacking in this department.
+Those who have attempted to curate their own collection of video games understand that doing so has historically been a hassle. While there are clearly-defined, community-accepted guidelines for collecting in other fields such as coins, comics, and artwork, video games have been notably lacking in this department.
 
-The Video Game Condition Report aims to standardize the way that video game hardware and software is described insofar as the actual status of the collectible, as well as provide a method for encoding concise information (the VGCC) into a QR code, NFC tag, or any similar medium for decoding by a portable device such as a phone or scanner.
+The Video Game Condition Report aims to standardize the way in which video game hardware and software is described insofar as the actual status of the collectible. It also seeks to provide a method for encoding concise information (the VGCC) into a QR code, NFC tag, or any similar medium for decoding by a portable device such as a phone or scanner.
 
-By creating and releasing this standard we, the Gameetrics Foundation, hope to help mitigate any misunderstandings where it comes to sales, trading, and describing of collectibles.
+By creating and releasing this standard, we, the Gameetrics Foundation, hope to help mitigate any misunderstandings related to selling, trading, and describing collectibles.
 
 ## Terminology
 
@@ -66,7 +66,7 @@ The keywords **MUST**, **MUST NOT**, **REQUIRED**, **SHALL**, **SHALL NOT**, **S
 
 ## Availability & Updates
 
-The latest version document will always be hosted at https://gametrics.org
+The latest version of this document will always be hosted at https://gametrics.org
 
 To propose changes, please submit a pull request at https://github.com/Karunamon/grc
 
@@ -80,30 +80,30 @@ The version number will be given:
 
 * In the title of this document
 * In a tag with the prefix `v` in the above-mentioned git repository
-* In the version field in a compliant VGCC
+* In the version field of a compliant VGCC
 
 Any backward-incompatible changes, such as changing the format or ordering of a field or attribute, will be reflected by incrementing the counter by one.
 
 ## Scope
 
-The VGCC is intended as a standard for encoding and displaying the condition of *only* physical video game hardware, software, and peripherals. 
+The VGCC is intended to serve as a standard for encoding and displaying the condition of *only* physical video game hardware, software, and peripherals. 
 
-The following specific types of items are explicitly considered out-of-scope despite their categorical relationship with video games. This standard **MAY** be used for classification of these items, but the specific needs of these items will not be considered by the VGCR working group, either in this standard or any supporting documentation or tooling:
+The following specific types of items are explicitly considered out-of-scope, despite their categorical relationship with video games. This standard **MAY** be used for classification of these items, but the specific needs of these items will not be considered by the VGCR working group, either in this standard or any supporting documentation or tooling:
 
 Item type                           | Reasoning
 ------------------------------------|---------------------------------------------------
 Pinball tables                      | Not considered video games
 Electronically-assisted board games | Not considered video games
-IBM or Mac PCs and clones           | Impossible to determine a specific brand or model
-Arcade machines                     | Planned for a future version of the standard
+IBM or Mac PCs and clones           | Impossible to determine the specific brand or model
+Arcade machines                     | Planned to be included in a future version of the standard
 
 # General Syntax
 
-A valid VGCC string **MUST** follow this format:
+A valid VGCC string **MUST** follow the format listed below:
 
 `VGCC Version Field|Hardware Identity Field|Condition Field|Repair History Field|`
 
-A "field" is a broad delineation of related information that contains one or more attributes.
+Here, a "field" is a broad delineation of related information that contains one or more attributes.
 
 An "attribute" is a section of information within a field that concretely describes some facet of information about a physical item, prefixed by a fixed number of one or more ASCII letters or numbers.
 
@@ -113,19 +113,19 @@ Field prefixes are case-sensitive.
 
 ## Length
 
-A VGCC string **MUST NOT** exceed 1024 characters *before* compression. If a given code would be above this limit after adding a repair record, the creator of the code **MUST** use their best judgment to remove old or less-important records, paying special attention to any attributes in the `Condition` field that may no longer apply as a result of maintenance undertaken.
+A VGCC string **MUST NOT** exceed 1024 characters *before* compression. If a code exceeds this limit after adding a repair record, the creator of the code **MUST** use their best judgment to remove old or less-important records, paying special attention to any attributes in the `Condition` field that may no longer apply as a result of undertaken maintenance.
 
 ## Encoding
 
-Usable characters in a VGCC string are the ASCII letters A through Z in mixed case, numbers 0 through 9, and the symbols `!?;-|_,`.  
+For this application, usable characters in a VGCC string include mixed case ASCII letters A through Z, numbers 0 through 9, and the symbols `!?;-|_,`.  
 
-The pipe (`|`) and comma (`,`) characters are reserved as field and attribute separators respectively, and **MUST NOT** appear in any other context. "Escaping" these characters for other uses is not permitted.
+The pipe (`|`) and comma (`,`) characters are reserved as field and attribute separators, respectively, and **MUST NOT** appear in any other context. "Escaping" these characters for other uses is not permitted.
 
 The PCRE regular expression `^([A-Z]|[a-z]|[0-9]|[\!\?\|\-,;_])+$` **MAY** be used to check whether a VGCC string contains invalid characters.
 
 ## Free-text attributes
 
-Certain attributes are designated as free-text. A free-text attribute contains 32 characters or less of alphanumeric characters subject to the encoding rules above. This text **SHOULD** be understood by tools that create or parse codes as arbitrary and conforming to no standard save for the description here.
+Certain attributes are designated as free-text. A free-text attribute contains 32 characters or less of alphanumeric characters subject to the encoding rules provided above. This text **SHOULD** be understood by tools that create or parse codes as arbitrary and conforming to no standard, aside from this description.
 
 Since whitespace is not allowed per the encoding rules, the underscore (`_`) **MAY** be used as a word separator if desired.
 
@@ -135,13 +135,13 @@ Any attribute designated as "optional" **MUST** still include its attribute pref
 
 # Design Philosophy
 
-The syntax of a VGCC hardware identity field is laid out in a hierarchical structure, starting broadly and then narrowing down to the identity of an individual item.
+The syntax of a VGCC hardware identity field is laid out in a hierarchical structure, starting broadly and then narrowing down to the identity of an individual item. This broad-to-narrow design was chosen because it allows for maximum flexibility in describing different types of items. 
 
-Consider the example of a launch day US Playstation 2. The hardware field could look like:
+Consider the following example of a launch day US Playstation 2. The hardware field could look like:
 
 `|BSONY,AO,FPS2,RU,TCON,MPS2,CBLK,VSCPH-90001,SU3565655,I|`
 
-Hierarchically, this breaks down as
+Hierarchically, this breaks down as:
 
 ```
 Sony
@@ -156,7 +156,6 @@ Sony
                   No added information
 ```
 
-This broad-to-narrow design was chosen because it allows for maximum flexibility in describing different types of items. 
 
 # Field Syntax
 
