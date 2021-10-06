@@ -34,11 +34,11 @@ email = "ldeville@gametrics.org"
 
 .# Abstract
 
-This memo defines a new encoding method for video game hardware/software identity and condition, and optionally, repair history.
+This memo defines a new encoding method for video game hardware/software identity, condition, and, optionally, repair history.
 
 .# Status of This Memo
 
-This standard is currently in a developmental, RFC draft phase. It should not be used for any non-development purpose until it has been finalized and tooling has been developed.
+This standard is currently in a developmental, RFC draft phase. Therefore, it should not be used for any non-development purpose until it has been finalized and tooling has been developed.
 
 .# Copyright Notice
 
@@ -50,7 +50,7 @@ Permission is granted to copy, distribute and/or modify this document under the 
 
 # Introduction
 
-The VGCC, Video Game Condition Code, is a condensed text string intended to denote the general status, details, and repair history of consumer video game consoles, software, and peripherals. It is intended for use by collectors, curators, retailers, resellers and enthusiasts, for any use case where a standardized way of representing the history and condition of video game paraphernalia would be beneficial.
+The Video Game Condition Code (VGCC) is a condensed text string intended to denote the general status, details, and repair history of consumer video game consoles, software, and peripherals. The target user base is  composed of collectors, curators, retailers, resellers, and enthusiasts. The VGCC can be applied in cases where a standardized method for representing the history and condition of video game paraphernalia would be beneficial.
 
 ## The Need for a Standard
 
