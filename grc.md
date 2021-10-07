@@ -161,7 +161,7 @@ Sony
 
 ## Version Field
 
-This field **MUST** begin with an all-caps "VGCC" followed by a digit indicating the revision of the standard used:
+As shown below, this field **MUST** begin with an all-caps "VGCC" followed by a digit indicating the revision of the standard used:
 
 `VGCC(version number)`
 
@@ -173,7 +173,7 @@ For representation in QR codes or in a space-constrained medium, a VGCC **MAY** 
 
 ## Hardware Identity Field
 
-The hardware identity field defines, hierarchically, the identity of the item the code is being written for. 
+The hardware identity field defines, hierarchically, the identity of the item for which the code is being written. 
 
 This field **MUST** be ordered as follows:
 
@@ -183,7 +183,7 @@ This field **MUST** be ordered as follows:
 
 The Brand attribute is a four-letter representation of the original manufacturer of the hardware or software.
 
-Owing to the large number of possible brands, the VGCC standard will not attempt to define a list of all brands. Nevertheless, it is **RECOMMENDED** that companies appearing in the following table use the given brand code:
+Due to the large number of possible brands, the VGCC standard will not attempt to define a list of all brands. Nevertheless, it is **RECOMMENDED** that common companies appearing in the following table use the given brand codes:
 
 Code | Company
 -----|--------
@@ -194,7 +194,7 @@ SEGA | Sega
 ATAR | Atari
 COMM | Commodore
 
-Codes prefixed with a `!` indicate missing information. These special codes **MUST NOT** be used for any other purpose.
+Codes prefixed with a `!` indicate entries with missing information. These special codes **MUST NOT** be used for any other purpose.
 
 Code | Meaning
 -----|--------
@@ -202,35 +202,35 @@ Code | Meaning
 !UNKN| Unknown brand (but one probably exists)
 
 
-- `!NONA` indicates that the brand is unknown *and* unknow*able*. This could be a "no name" item with no meaningful brand information available, and it is unlikely that it will ever be known.
-- `!UNKN` indicates that there probably is a brand, but that the information is not known to the creator of the code
+- `!NONA` indicates that the brand is unknown *and* unknow*able*. This could refer to a "no name" item with no meaningful brand information available, where it is unlikely that the brand will ever be known.
+- `!UNKN` indicates that there is likely a brand associated with the item, but the information is not known to the creator of the code.
 
-When creating brand codes, it is **RECOMMENDED** that the following considerations apply:
+When creating brand codes, it is **RECOMMENDED** that users apply the following considerations:
 
-- If an item is known to be released by a subsidiary of a larger company, use the subsidiary's name (and so Tengen would be its own company, not Atari, even though Tengen was an Atari subsidiary).
-- For similarly-named regional subsidiaries, such as Nintendo of Japan or Nintendo of America, use the code of the parent company. Splitting regional subsidiaries into their own brands may represent too much granularity.
+- If an item is known to be released by a subsidiary of a larger company, use the subsidiary's name (i.e., Tengen would be its own company, separate from its parent Atari, even though Tengen was an Atari subsidiary).
+- For similarly-named regional subsidiaries, such as Nintendo of Japan or Nintendo of America, use the code of the parent company. Splitting regional subsidiaries into their own brands may present too much granularity.
 
 ### Authenticity \(A\)
 
-This attribute represents the authenticity of the device, i.e if the hardware is made by who it claims to be made by.
+This attribute represents the authenticity of the device, i.e., whether the hardware is actually made by whoever claims to have made it.
 
-The attribute takes the form of:
+This attribute takes the form of:
 
 - **`O`** if this is original or OEM hardware/software.
 - **`R`** if it is a repro or bootleg.
 
-Consider the brand/manufacturer when determining whether a device is original or repro. For example, if a piece of hardware passes itself off as Nintendo hardware but is not made by Nintendo, its proper code is **`R`**. Third-party consoles, even if they run OEM software (example: [the RetroN series of consoles](https://en.wikipedia.org/wiki/RetroN)), still do not pass themselves off as OEM hardware, and **MUST** be given as their own company name with an authenticity attribute of `O`
+Consider the brand/manufacturer when determining whether a device is original or repro. For example, if a piece of hardware presents itself as Nintendo hardware, but is not made by Nintendo, its proper code is **`R`**. Third-party consoles, even if they run OEM software (example: [the RetroN series of consoles](https://en.wikipedia.org/wiki/RetroN)), still are not genuine OEM hardware, and **MUST** be represented with their own company name and an authenticity attribute of `O`.
 
 
 ### Family \(F\)
 
-This attribute represents the general hardware family of the item. It is composed of a 3-character ALL-CAPS alphanumeric string.
+This attribute represents the item's general hardware family. It is composed of a 3-character ALL-CAPS alphanumeric string.
 
 The *first* release of any hardware system in any region defines the family. For example, the US NES is part of the Famicom family of systems.
 
-For software, the family indicates the primary system the software is intended to run on.
+For software, the family indicates the primary system on which the software is intended to run.
 
-Owing to the large number of possible brands, the VGCC standard will not attempt to define all possible families. Nevertheless, it is **RECOMMENDED** that hardware appearing in the following table use the given family code:
+Owing to the large number of possible brands, the VGCC standard will not attempt to define all possible families. Nevertheless, it is **RECOMMENDED** that common hardware appearing in the following table use the given family codes:
 
 Family Code | Description
 ------------|-----------
@@ -255,7 +255,7 @@ PC8         | NEC PC-88
 
 ### Region \(R\)
 
-This attribute represents the original release region of the item. It **MUST** be a recognized 1 to 3-letter GoodTools country code. [@goodtools-country]
+This attribute represents the original release region of the item. This **MUST** be a recognized 1- to 3-letter GoodTools country code. [@goodtools-country]
 
 ### Type \(T\)
 
@@ -277,15 +277,15 @@ AMD       | Alternate media device (ex: N64 Disk Drive, Famicom disk system, Suf
 
 This attribute is considered free-text.
 
-This attribute represents different releases of a given set of hardware of the same type and family with different features or functionality. For example, the Sega Genesis models 1, 2, or 3, or the PS2 fat or slim.
+This represents different releases of a given set of hardware of the same type and family with different features or functionality. For example, the Sega Genesis models 1, 2, or 3, or the PS2 fat or slim.
 
-It is **RECOMMENDED** that, if a VGCC is describing a piece of hardware that is the first in its family, that this attribute be set to the same value as the family attribute.
+It is **RECOMMENDED** that, if a VGCC is describing a piece of hardware that is the first in its family, this attribute be set to the same value as the family attribute.
 
 ### Color \(C\)
 
 This attribute is **OPTIONAL** and may be left empty.
 
-Represents the official color of the device as given by the manufacturer at manufacture time. 
+It represents the official color of the device as given by the manufacturer. 
 
 If provided, this attribute **MUST** contain the first three letters of the official color as given by the manufacturer. If the manufacturer calls their color "platinum", use PLA rather than SIL (silver).
 
@@ -293,19 +293,19 @@ If provided, this attribute **MUST** contain the first three letters of the offi
 
 This attribute is **OPTIONAL** and may be left empty. If provided, it is considered free-text.
 
-Represents a distinct hardware variant of a given model. For example, the "standard" Sega Dreamcast has the VA0, VA1, and VA2 variants
+This represents a distinct hardware variant of a given model. For example, the "standard" Sega Dreamcast has the VA0, VA1, and VA2 variants.
 
 ### Serial number \(S\)
 
 This attribute is **OPTIONAL** and may be left empty. If provided, it is considered free-text.
 
-Represents the full manufacturer serial number (*not* model number) of the device. If the serial number is unknown or non-existent, this field **MUST** be left blank.
+This represents the full manufacturer serial number (*not* the model number) of the device. If the serial number is unknown or non-existent, this field **MUST** be left blank.
 
 ### Information \(I\)
 
 This attribute is **OPTIONAL** and may be left empty. If provided, it is considered free-text.
 
-Contains any other special information the code creator wishes to share. This field **SHOULD** be used sparingly and only when the information provided is not duplicated by any other field and is significantly important to the identity of the item being cataloged.
+This contains any other special information the code creator wishes to share. This field **SHOULD** be used sparingly and only when the information provided is not covered or addressed by any other field and is significant to the identity of the item.
 
 ## Condition Field
 
@@ -323,27 +323,27 @@ Condition Code | Description
 ---------------|------------
 NEW            | New, still in *unopened* factory packaging.
 MNT            | Mint, opened, but in best concievable OEM physical condition. **No damage or mods**.
-USD            | Used, but fully functional. May have damage or be modified. Includes the presence of manufacturer refurbished hardware.
-PNF            | Used, partially nonfunctional (system is fit for purpose but certain functions are degraded)
-CNF            | Completely nonfunctional (system is no longer fit for purpose)
+USD            | Used, but fully functional. May have damage or modifications. Includes the presence of manufacturer refurbished hardware.
+PNF            | Used, partially nonfunctional (system is fit for purpose but certain functions are degraded).
+CNF            | Completely nonfunctional (system is no longer fit for purpose).
 
 ### Currently Known Damage \(D\) {#damagecodes}
 
 This attribute tracks various kinds of damage or degradation of an item. Damage consists of hardware or software deficiencies, with each class of damage having its own unique 3-letter code.
 
-If multiple damage classes apply to the item, they **MUST** be listed consecutively, with no delimiter. For example, an item with a yellowed case, smoke damage, and missing clips would have a damage attribute of `SHYSMKFST`.
+If multiple damage classes apply to the item, they **MUST** be listed consecutively, with no delimiter. For example, an item with a yellowed case, smoke damage, and missing clips would have a damage attribute of `SHYSMKFST`. Similarly, consecutive types of the same class of damage **MUST** be coded consecutively. For example, for a yellowed and cracked shell, the code is `SHCSHY` rather than `SHYC`.
 
 If new damage occurs, or if the damage is repaired by servicing, such as a shell replacement, the known damage fields **MUST** be updated to reflect the item's ***current*** condition.
 
-The list below is formatted for ease of reading. Consecutive types of the same class of damage **MUST** be coded consecutively, so for a yellowed and cracked shell, the code is `SHCSHY` rather than `SHYC`.
-
-A minor convention used in damage codes is that a code ending in `___X` indicates destruction or unknown damage to the component, where `___Z` indicates the component is outright missing.
+A minor convention used in damage codes is that a code ending in `___X` indicates destruction or unknown damage to the component, whereas `___Z` indicates the component is outright missing.
 
 Here we describe two sets of damage codes, quantifiable and non-quantifiable. 
 
-A quantifiable code is one where a severity of damage **MUST** be assigned, represented in the code as a digit from 1 to 3, where 1 is trivial and 3 is severe. For example, a scratched or fogged display could have a severity of "1" if the scratches are in a small area of the screen and don't effect readability, or a "3" if the scratches are ubiqitous and make the screen unusable. This severity entails a judgment call on the part of code creators, so decodiing tools **SHOULD NOT** attempt to read more meaning into 1, 2, and 3 beyond "superficial, moderate, and severe".
+A quantifiable code is one where a severity of the damage **MUST** be assigned, represented in the code as a digit from 1 to 3. Here, a value of 1 is trivial damage and 3 is severe damage. For example, a scratched or fogged display could have a severity of "1" if the scratches are in a small area of the screen and don't affect readability, but a "3" could be assigned if the scratches are ubiqitous and make the screen unusable. This severity entails a judgment call on the part of the code creator, so decodiing tools **SHOULD NOT** attempt to read more meaning into 1, 2, and 3 beyond "superficial, moderate, and severe".
 
 For formatting purposes, quantifiable codes are displayed here with a `#`. In real codes, this will be a number.
+
+The list below is formatted for ease of reading. 
 
 Code  | Description
 ------| -----------
@@ -354,15 +354,15 @@ Code  | Description
 `HID#`| Intermittent or non-functional gameplay controls
 `LCP#`| Partially or completely nonfunctional PCB edge connector (cartridge slot or similar)
 `LMC#`| Loose controller port
-`LMC#`| Loose or damaged PCB edge connector (cartridge slot, etc)
+`LMC#`| Loose or damaged PCB edge connector (cartridge slot, etc.)
 `LME#`| Loose expansion or memory card port
 `LMP#`| Loose power connector
-`LMS#`| Loose switch of any kind (power/mode/etc.)
+`LMS#`| Loose switch of any kind (power,mode,etc.)
 `LMV#`| Loose video port
 `ODX#`| Optical drive damaged (intermittent, unreliable, or non-functional)
-`OMC#`| Disc cracked (center ring or in an area that doesn't render the disc unreadable)
+`OMC#`| Disc cracked (in the center ring or an area that doesn't render the disc unreadable)
 `OMR#`| Visible damage or holes in the data layer due to label damage or "Disc rot"
-`OMS#`| Dis scratched
+`OMS#`| Disc scratched
 `OSX#`| On-board storage is corrupt or non-functional
 `SCC#`| Screen cracks
 `SCD#`| Digitizer (touchscreen) issues
@@ -380,14 +380,14 @@ Code  | Description
 `WAT#`| Water/moisture/other liquid damage, including rust
 Table: Quantifiable Damage Codes {#qdamage}
 
-A non-quantifiable damage code is one that describes a binary state. For example, `SHZ` describes a device missing its entire shell, but a missing shell cannot be more or less severe; it is either missing or it is not. For `__Z` codes that describe a missing item, a code creator **SHOULD** precisely define the missing item in a `TXT` if the code does not; for example, if connectors are missing, explain which ones.
+A non-quantifiable damage code is one that describes a binary state. For example, `SHZ` describes a device missing its entire shell. In cases like this, a missing shell cannot be more or less severe; it is either missing or it is not. For `__Z` codes that describe a missing item, the code creator **SHOULD** precisely define the missing item in a `TXT` if not defined by the code. For example, if connectors are missing, explain which specific ones are missing.
 
 Code | Description
 -----| -----------
 `BUG`| Evidence of insect infestation
 `DNS`| Does not save, battery backup/saving failure
 `ECZ`| Electrical components are missing
-`FST`| Missing fasteners (clips, screws, etc)
+`FST`| Missing fasteners (clips, screws, etc.)
 `LMZ`| Outright missing connectors
 `ODZ`| Optical drive missing
 `OLX`| Limited access to online services (game bans, or restriction to updates only)
@@ -398,7 +398,7 @@ Code | Description
 `SCZ`| Screen is missing
 `SHX`| Missing shell parts, such as a battery or port cover
 `SHZ`| Shell is missing outright
-`XXX`| This item has been irreperably destroyed.
+`XXX`| Item has been irreperably destroyed.
 `TXT`| Free-text follows. **MUST** come last.
 Table: Non-quantifiable Damage Codes {#nonqdamage}
 
