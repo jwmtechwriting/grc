@@ -404,17 +404,17 @@ Table: Non-quantifiable Damage Codes {#nonqdamage}
 
 ### Modifications \(M\) {#modcodes}
 
-This attribute represents a list of the item's aftermarket modifications, including custom shells, LED modifications, etc., including those done to the item's software.
+This attribute represents a list of an item's aftermarket modifications, including custom shells, LED modifications, etc.. This also includes any modifications to the item's software.
 
-What constitutes a modification rather than a repair is whether the console appears or behaves differently from a stock console. Replacing a damaged shell with an identical shell is a repair (swap), whereas replacing a shell with a different colored shell is a modification.
+What constitutes a modification, and separates it from a repair, is whether the console appears or behaves differently from a stock console. Replacing a damaged shell with an identical shell is a repair (swap), whereas replacing a shell with a different colored shell is a modification.
 
 If there are no known modifications present, this field **MUST** be populated with "STK".
 
 Code  | Meaning
 ------|------------
 `STK` | No known modifications present on this console
-`LED` | LED modification; lights have been added to part of the item that did not have them before, or existing colors were replaced
-`SHL` | Shell modification; replacing with a non-stock shell or painting a shell with a custom color
+`LED` | LED modification; lights have been added to the item where there were none before, or existing colors were replaced
+`SHL` | Shell modification; replaced with a non-stock shell or painted a shell with a custom color
 `BKL` | Backlight
 `RGF` | Region-free
 `CHP` | Modchip
@@ -426,15 +426,15 @@ Code  | Meaning
 `AUD` | Audio-output modifications (speakers, headphones)
 `PCB` | Circuit or PCB-level mods, not including region-free or modchip installation
 `ODE` | Optical drive emulator
-`INT` | Integration, installing normally external peripherals into a shell (ex: Genesis [@Neptune] mod) 
+`INT` | Integration, installation of normally external peripherals into a shell (ex: Genesis [@Neptune] mod) 
 
 ### Known Repairs/Replacements \(E\)
 
 This attribute represents a list of non-modification repairs. It includes replacing OEM parts with reproduction parts that look and perform identically to their OEM counterparts. This would include replacing a cracked shell with an identical one, replacing minor electronic components, screen repair, etc.
 
-Generally, what differentiates a `M` (mod) from an `E` (repair) is whether the system has been customized or substantially changed from its OEM state. If this difference is ambiguous for your use case, you **SHOULD** default to using the `M` code instead.
+Generally, what differentiates a `M` (mod) from an `E` (repair) is whether the system has been customized or substantially changed from its OEM state. If this difference is ambiguous for your use case, you **SHOULD** default to using the `M` code.
 
-- Repairs/replacements of already-modified components **MUST** be treated as a re-modification and not included in this field.
+- Repairs/replacements of already-modified components **MUST** be treated as a re-modification and should thus not be included in this field.
 - Repair codes **MUST** be considered permanent and never be removed for any reason unless inaccurate.
 
 The list of repair codes is as follows:
@@ -447,7 +447,7 @@ Code | Description
 `DIG`| Digitizer (touchscreen)
 `HID`| Game controls (dpads, buttons, sticks - use `SHL` for system controls like power, volume, brightness)
 `LBL`| Label or printing replacement
-`NRO`| No repairs, has been opened (seals broken, if unsure, use this code)
+`NRO`| No repairs, has been opened (seals broken, use this code if unsure)
 `NRS`| No repairs, all seals still intact
 `PCB`| PCB components
 `PRT`| Ports (controller, data, video, sound etc.)
@@ -462,19 +462,19 @@ Table: List of Repair Codes {#repaircodes}
 
 ### Refurbished / Non-OEM Parts \(U\)
 
-This attribute represents a list of components of an item which are non-stock. It **MUST** be a consecutive list of items as defined in (#repaircodes)
+This attribute represents a list of an item's components that are non-stock. It **MUST** be a consecutive list of items as defined in (#repaircodes).
 
 ## Service History Field
 
 This field is **OPTIONAL** and may be skipped.
 
-The service history field represents a list of repair events. A "repair event" defined as service of a single item or directly related group of items in a sub-assembly.
+The service history field represents a list of repair events. A "repair event" is defined as service of a single item or directly related group of items in a sub-assembly.
 
 The format for a repair event is as follows:
 
 `(Datestamp)(Repair type)(Item repaired)(Free-text),`
 
-- The history list **MUST** be in chronological order, oldest events first.
+- The history list **MUST** be in chronological order, with oldest events first.
 - Each event **MUST** be comma-separated.
 - If a service history entry is invalidated or duplicated by a later event, such as the same component being replaced twice, the earlier entry **MUST** be removed.
 - Code creators **MUST NOT** add new service history items that they did not either personally perform or have performed on their behalf, unless a specific record of the repair or modification is available, such as an invoice.
@@ -487,20 +487,20 @@ If the repair date is entirely unknown, but you know a repair was made, you **MU
 
 ### Repair Types
 
-Represents the general disposition of the changes made to the item. This **MUST** be one of the codes below:
+This represents the general disposition of the changes made to the item. This **MUST** be one of the codes below:
 
 Code | Meaning
 -----|---------
 M    | Mod
 O    | Swapped in an OEM part
 T    | Swapped in a third-party or reproduction part
-R    | Repair (existing parts condition improved, or significant cleaning that resolves a concrete functional problem)
+R    | Repair (existing part's condition improved, or significant cleaning performed that resolves a concrete functional problem)
 
 Swaps or repairs that require no tools, such as battery replacements or cleaning intended to be done by the end user (for example, taking a cotton swab to a the laser on a disc system) **MUST NOT** have a repair entry added.
 
 ### Item Repaired
 
-Use a valid code from (#repaircodes)
+Use a valid code from (#repaircodes).
 
 # Example Code
 
@@ -531,7 +531,7 @@ PUSD | Physical condition: Used
 DSHCSMKTXTSmoking_home | Damage: Cracks in shell, smoke. Free-text: Smoking home
 MCHPLED | Modifications: Modchip and LEDs installed
 ESHLPRTDDA | Repairs made: Shell, port(s), disc drive assembly
-USHL| Refurbisehed parts used: Shell
+USHL| Refurbished parts used: Shell
  _ | **Field separator, repair history section begins**
 20200829MCHPHyperBoot | August 29, 2020: Mod installed / Modchip / Free-text: Hyperboot
 20200829MLEDCtrlr | August 29, 2020: Mod installed / LED(s) / Free-text: Controller ports
@@ -544,53 +544,53 @@ USHL| Refurbisehed parts used: Shell
 
 # Corner Cases and Ambiguities
 
-The organization scheme this standard sets out is suitable for nearly all purposes, yet there are specific niche pieces of hardware that could lead to ambiguity when defining codes. Some of these will be covered here as a sort of FAQ.
+The organization scheme set by this standard is suitable for nearly all purposes. However, there are specific niche pieces of hardware that could lead to ambiguity when defining codes. Some of these cases are covered in this section.
 
-**Multi-part Peripherals:** In the case of peripherals that have multiple independent parts (example: The SNES Super Scope itself, and the IR dongle that connects to the console), each part **MUST** be considered as its own unique peripheral, so the scope and the dongle would have their own individual VGCCs. Batching components together **MUST NOT** be done.
+**Multi-part Peripherals:** In the case of peripherals that have multiple independent parts (example: The SNES Super Scope itself, and the IR dongle that connects to the console), each part **MUST** be considered its own unique peripheral, so the scope and the dongle would have their own individual VGCCs. Batching components together **MUST NOT** be done.
 
 ## Type Classification
 
 Certain items may defy the code `T` classification scheme, or have good arguments for falling under multiple categories. The VGCR working group **RECOMMENDS** the following:
 
-**Cheat Devices:** All-in-one devices (that is, the cheat hardware and software are part of a single physical unit, ex: the NES Game Genie) are considered `SFT`. In the case of devices that have a separate cheat device as well as software, such as the PlayStation or Gamecube Action Replay, these must have their own separate VGCCs. The disc is `SFT`, and the hardware is `SNT` (as the device is intrinsic to the function of the software).
+**Cheat Devices:** All-in-one devices (that is, the cheat hardware and software are part of a single physical unit, ex: the NES Game Genie) are considered `SFT`. In the case of devices that have a separate cheat device as well as software, such as the PlayStation or Gamecube Action Replay, these must have their own separate VGCCs. Here, the disc is `SFT`, and the hardware is `SNT` (as the device is intrinsic to the function of the software).
 
 **Cartridge Copiers / Backup Devices:** These are all considered `3PA`.
 
 **Multiplayer Adapters:** These fit under the `3PA` category, and include devices such as the XBAND for SNES or Genesis. Multitap devices made by the console OEM are considered `1PA`.
 
-**Cartridge Peripherals:** These would generally fit under the category of `AMD` - devices that plug into the cartridge slot and allow you to play additional content in a format that was not possible on the original hardware. This would include devices where content is downloaded from the internet, received over broadcast services, or alternate physical media formats. Examples would include the Broadcast Satellaview or Sega Channel, Mega CD, Famicom Disk System, etc. It would also include retro compatibility add-ons, such as the Game Boy Player for the GameCube. Note that the software and hardware must have their own codes if they can be separated. The Satellaview cartridge, memory unit, and satellite adapter are all distinct devices with distinct VGCCs.
+**Cartridge Peripherals:** These would generally fit under the category of `AMD` - devices that plug into the cartridge slot and allow you to play additional content in a format that was not possible on the original hardware. This would include devices where content is downloaded from the internet or received over broadcast services, as well as alternate physical media formats. Examples would include the Broadcast Satellaview or Sega Channel, Mega CD, Famicom Disk System, etc. It would also include retro compatibility add-ons, such as the Game Boy Player for the GameCube. Note that the software and hardware must have their own codes if they can be separated. The Satellaview cartridge, memory unit, and satellite adapter are all distinct devices with distinct VGCCs.
 
 **Software for Alternate Media Devices:** Use the family code of the parent console. "Sonic CD" would have a family code of `SMD`. 
 
 ## Ambiguity in Authenticity
 
-To avoid "ship of Theseus" situations when determining authenticity, it is **RECOMMENDED** to think in terms of non-replaceable components. For instance, it is quite possible to replace the shell and a number of electronic components on an NES, but it still contains a OEM NES CPU and PPU at the en of the day. If those components are replaced with an FPGA of some kind, and the device still claims to be made by Nintendo, then it is clearly a repro.
+To avoid "ship of Theseus" situations when determining authenticity, it is **RECOMMENDED** that users think in terms of non-replaceable components. For instance, it is quite possible to replace the shell and a number of electronic components on an NES, but nevertheless it still contains an OEM NES CPU and PPU. If those components are replaced with an FPGA of some kind, and the device still claims to be made by Nintendo, then it is clearly a repro.
 
-The VGCR working group can not hope to objectively determine the line between "real" and "repro". Code creators are encouraged to consider the expectations of the human readers of their codes and encode information according to the principle of least astonishment [@POLA].
+Objectively determining the line between "real" and "repro" is outside the scope of the VGCR working group. Therefore, code creators are encouraged to consider the expectations of the human readers of their codes and encode information according to the principle of least astonishment [@POLA].
 
 ## Refurbishment
 
-When sending consoles into OEMs, they may repair a system and send it back *or* send an entirely new refurbished console. Check the serial numbers in this case. If a new serial number is received, you have received a new console and **MUST** start a brand new VGCC. **Do not carry any history over.** If the hardware you received is not in its factory packaging, you **MUST** add a `REF` under code `D` and note its status as `USD` under code `C`
+When sending consoles into OEMs, they may repair a system and send it back *or* send an entirely new refurbished console. Check the serial numbers in this case. If a new serial number is received, you have received a new console and **MUST** start a brand new VGCC. **Do not carry any history over.** If the hardware you received is not in its factory packaging, you **MUST** add a `REF` under code `D` and note its status as `USD` under code `C`.
 
 Refurbished consoles likely have had components repaired. Even so, code creators **MUST NOT** guess which components are repaired/refurbished.
 
-## Conflicting Codes & other considerations
+## Conflicting Codes & Other Considerations
 
-Generally speaking, the "rules" for a VGCC are:
+Generally speaking, the "rules" for a VGCC are as follows:
 
-1. Codes **MUST NOT** conflict with one another under any circumstances. Any situation which would result in a conflict is a case where one or multiple codes must be adjusted, or is an unforeseen design flaw with the VGCC standard.
+1. Codes **MUST NOT** conflict with one another under any circumstances. Any situation that would result in a conflict is a case where one or multiple codes must be adjusted, or is an unforeseen design flaw with the VGCC standard.
 2. Codes **MUST NOT** convey the same information more than once, with the exception of the repair history field which may necessarily duplicate information in the condition or damage fields.
 3. Codes in the [hardware identity](#hardware) field are considered intrinsic to the identity of the item being cataloged, and **MUST NOT** be changed unless correcting an error. The attributes **MUST** be written according to their validity at the time the item was manufactured.
 4. Codes in the [condition](#condition) field relate to the *present* condition of the item and **SHOULD** be updated often.
-5. Codes **SHOULD** be constructed such that all pertinent information about a piece of hardware is present even if the [service history](#servicehistory) field is blank.
-6. Ambiguities **SHOULD** be resolved in a way that is least favorable to the value of the item. In other words, if you're not sure if something is a swap or a mod, default to considering it a mod.
-7. VGCCs are intended to classify individual items, not retail bundles. For instance, it is common for OEMs to sell different console bundles with different hardware, peripherals, and software. Each item in the bundle would have its own VGCC, not the bundle as a whole.
+5. Codes **SHOULD** be constructed such that all pertinent information about a piece of hardware is present, even if the [service history](#servicehistory) field is blank.
+6. Ambiguities **SHOULD** be resolved in the manner that is least favorable to the value of the item. For example, if you are not sure if an item should be considered a swap or a mod, default to considering it a mod.
+7. VGCCs are intended to classify individual items, not retail bundles. For instance, it is common for OEMs to sell different console bundles with different hardware, peripherals, and software. In this case, each item in the bundle would have its own VGCC, rather than the bundle as a whole.
 
 # Legal
 
 ## Safety/Security Considerations
 
-Nothing prevents an unscrupulous seller from misrepresenting their product. A VGCC is intended for shorthand to describe an item and its history, not as a mark of safety or trustworthiness. The VGCR working group take no responsibility for its use by third parties or the accuracy of the information those parties encode.
+Nothing prevents an unscrupulous seller from misrepresenting their product. A VGCC is intended to serve as shorthand to describe an item and its history, not as a mark of safety or trustworthiness. The VGCR working group takes no responsibility for its use by third parties or the accuracy of the information those parties encode.
 
 ## Warranty Disclaimer
 
